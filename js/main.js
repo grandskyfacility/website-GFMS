@@ -62,43 +62,50 @@ if (fadeEls.length) {
 }
 
 /* ---------- Contact Form ---------- */
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+const web3Forms = document.querySelectorAll('form[data-redirect]');
+if (web3Forms.length) {
+  web3Forms.forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    const btn = contactForm.querySelector('button[type="submit"]');
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sending...`;
-
-    const formData = new FormData(contactForm);
-    if (!formData.has('access_key')) {
-      formData.append('access_key', '777708b8-949b-42d0-9870-a28c7141ee16');
-    }
-
-    try {
-      const response = await fetch(contactForm.action || 'https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      });
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        const redirect = contactForm.dataset.redirect || 'thankyou.html';
-        window.location.href = redirect;
+      const btn = form.querySelector('button[type="submit"]');
+      if (!btn) {
         return;
       }
 
-      const message = data.message || 'Unable to submit the form. Please try again later.';
-      alert(`Error: ${message}`);
-    } catch (error) {
-      alert('Something went wrong. Please try again.');
-      console.error('Web3Forms submit error', error);
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = originalText;
-    }
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sending...`;
+
+      const formData = new FormData(form);
+      if (!formData.has('access_key')) {
+        formData.append('access_key', '777708b8-949b-42d0-9870-a28c7141ee16');
+      }
+
+      try {
+        const response = await fetch(form.action || 'https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          const redirect = form.dataset.redirect || 'thankyou.html';
+          window.location.href = redirect;
+          return;
+        }
+
+        const message = data.message || 'Unable to submit the form. Please try again later.';
+        alert(`Error: ${message}`);
+      } catch (error) {
+        alert('Something went wrong. Please try again.');
+        console.error('Web3Forms submit error', error);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    });
   });
 }
 

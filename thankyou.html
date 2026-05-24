@@ -63,15 +63,28 @@
 
   <footer class="footer" style="padding: 40px 0 20px;">
     <div class="container" style="text-align:center; color: rgba(255,255,255,0.75);">
-      <p>Redirecting to home in 5 seconds...</p>
+      <p id="redirectCountdown">Redirecting to home in <strong>5</strong> seconds...</p>
       <p>© 2026 GrandSky Facility &amp; Management Services LLP. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
-    setTimeout(() => {
-      window.location.href = 'index.html';
-    }, 5000);
+    document.addEventListener('DOMContentLoaded', () => {
+      let countdown = 5;
+      const countdownEl = document.getElementById('redirectCountdown');
+      const redirectUrl = location.pathname.replace(/thankyou\.html$/, 'index.html');
+
+      const interval = setInterval(() => {
+        countdown -= 1;
+        if (countdownEl) {
+          countdownEl.innerHTML = `Redirecting to home in <strong>${countdown}</strong> seconds...`;
+        }
+        if (countdown <= 0) {
+          clearInterval(interval);
+          window.location.replace(redirectUrl);
+        }
+      }, 1000);
+    });
   </script>
   <script src="js/main.js"></script>
 </body>
