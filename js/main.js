@@ -5,6 +5,17 @@
 (function () {
   'use strict';
 
+  /* ---------- Fail-safe reveal bootstrap ----------
+     The stylesheet only hides elements while `html.js` is present. We add that
+     class here and remove it again if anything below throws, so a blocked,
+     missing, or broken script can never leave the page blank. */
+  const root = document.documentElement;
+  const revealEverything = () => root.classList.remove('js');
+  root.classList.remove('no-js');
+  root.classList.add('js');
+  window.addEventListener('error', revealEverything);
+  window.addEventListener('unhandledrejection', revealEverything);
+
   /* ---------- Header + scroll progress + back-to-top ---------- */
   const header = document.getElementById('header');
   const progress = document.getElementById('scrollProgress');

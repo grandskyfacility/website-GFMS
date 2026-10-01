@@ -990,7 +990,10 @@ p:last-child { margin-bottom: 0; }
 /* ============================================
    ANIMATIONS
    ============================================ */
-.fade-up {
+/* IMPORTANT: the "hidden" state is scoped to `html.js`, which is only set by
+   js/main.js. If the script is blocked, missing, or throws, the class is never
+   added and every element renders normally. Content must never depend on JS. */
+.js .fade-up {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -1001,7 +1004,7 @@ p:last-child { margin-bottom: 0; }
   transform: translateY(0);
 }
 /* General-purpose scroll reveal (used for headings etc.) */
-.reveal {
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s cubic-bezier(.22, 1, .36, 1), transform 0.7s cubic-bezier(.22, 1, .36, 1);
@@ -1010,17 +1013,17 @@ p:last-child { margin-bottom: 0; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* Directional + zoom reveal variants (picked up by the shared observer) */
-.reveal-left,
-.reveal-right,
-.zoom-in {
+.js .reveal-left,
+.js .reveal-right,
+.js .zoom-in {
   opacity: 0;
   transition: opacity 0.75s cubic-bezier(.22, 1, .36, 1), transform 0.75s cubic-bezier(.22, 1, .36, 1);
   transition-delay: var(--d, 0s);
   will-change: opacity, transform;
 }
-.reveal-left  { transform: translateX(-44px); }
-.reveal-right { transform: translateX(44px); }
-.zoom-in      { transform: scale(0.9); }
+.js .reveal-left  { transform: translateX(-44px); }
+.js .reveal-right { transform: translateX(44px); }
+.js .zoom-in      { transform: scale(0.9); }
 .reveal-left.visible,
 .reveal-right.visible,
 .zoom-in.visible { opacity: 1; transform: none; }
@@ -1807,8 +1810,8 @@ textarea:focus-visible {
   .process-grid { grid-template-columns: 1fr; }
   .commit-grid { grid-template-columns: 1fr; }
   /* Directional reveals fall back to vertical so nothing shifts sideways */
-  .reveal-left, .reveal-right { transform: translateY(26px); }
-  .reveal-left.visible, .reveal-right.visible { transform: translateY(0); }
+  .js .reveal-left, .js .reveal-right { transform: translateY(26px); }
+  .js .reveal-left.visible, .js .reveal-right.visible { transform: translateY(0); }
   .hero-visual { animation-name: heroRise; }
   /* Only reserve space on pages that actually show the bar */
   body:has(.mobile-cta) { padding-bottom: 72px; }
