@@ -305,6 +305,89 @@
     });
   }
 
+  /* ---------- 5-year celebration promo (homepage only) ----------
+     The card ships with `hidden`, so it appears only when JS is alive and
+     working. It re-appears once every 7 days rather than nagging on every
+     visit, and traps focus so keyboard users cannot tab into the page
+     behind it. */
+  const promo = document.getElementById('promo');
+  if (promo) {
+    const PROMO_KEY = 'gsPromoSeenAt';
+    const REOPEN_AFTER = 7 * 24 * 60 * 60 * 1000;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let lastFocused = null;
+
+    const seenRecently = () => {
+      try {
+        const stamp = Number(localStorage.getItem(PROMO_KEY) || 0);
+        return stamp > 0 && Date.now() - stamp < REOPEN_AFTER;
+      } catch (err) {
+        return false; // storage blocked — show it rather than hide the milestone
+      }
+    };
+    const rememberDismissed = () => {
+      try { localStorage.setItem(PROMO_KEY, String(Date.now())); } catch (err) { /* ignore */ }
+    };
+
+    const openPromo = () => {
+      if (promo.classList.contains('open')) return;
+      lastFocused = document.activeElement;
+      promo.hidden = false;
+      document.body.classList.add('promo-open');
+      // Reveal on the next frame so the transition has a start state to run from.
+      window.requestAnimationFrame(() => promo.classList.add('open'));
+      const closeBtn = promo.querySelector('.promo-close');
+      if (closeBtn) closeBtn.focus();
+    };
+
+    const closePromo = () => {
+      if (!promo.classList.contains('open')) return;
+      rememberDismissed();
+      promo.classList.remove('open');
+      document.body.classList.remove('promo-open');
+      // Hand focus back to wherever it came from. If that was the page itself,
+      // blur instead — otherwise focus would stay trapped on the hidden close button.
+      if (lastFocused && lastFocused !== document.body && lastFocused.focus) {
+        lastFocused.focus();
+      } else if (document.activeElement && document.activeElement.blur) {
+        document.activeElement.blur();
+      }
+      setTimeout(() => {
+        // Guard against a reopen landing mid-transition.
+        if (!promo.classList.contains('open')) promo.hidden = true;
+      }, 500);
+    };
+
+    promo.querySelectorAll('[data-promo-close]').forEach(el => {
+      el.addEventListener('click', closePromo);
+    });
+    // Following a link inside the promo counts as dismissing it.
+    promo.querySelectorAll('a[href]').forEach(link => {
+      link.addEventListener('click', closePromo);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!promo.classList.contains('open')) return;
+      if (e.key === 'Escape') { closePromo(); return; }
+      if (e.key !== 'Tab') return;
+
+      // Simple focus trap across the card's controls.
+      const focusables = promo.querySelectorAll('a[href], button');
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    if (!seenRecently()) setTimeout(openPromo, reduced ? 0 : 900);
+  }
+
   /* ---------- Spinner keyframes ---------- */
   const style = document.createElement('style');
   style.textContent = '.spin { animation: spin 1s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } }';
