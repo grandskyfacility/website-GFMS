@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://fonts.gstatic.com https://api.web3forms.com; form-action https://api.web3forms.com; frame-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Thank You — GrandSky Facility & Management Services LLP</title>
   <meta name="description" content="Thank you for contacting GrandSky Facility & Management Services LLP. You will be redirected back to the home page shortly." />
   <meta http-equiv="refresh" content="5;url=index.html" />
@@ -63,29 +65,11 @@
 
   <footer class="footer" style="padding: 40px 0 20px;">
     <div class="container" style="text-align:center; color: rgba(255,255,255,0.75);">
-      <p id="redirectCountdown">Redirecting to home in <strong>5</strong> seconds...</p>
+      <p id="redirectCountdown">Redirecting to home in <strong id="redirectSeconds">5</strong> seconds...</p>
       <p>© 2026 GrandSky Facility &amp; Management Services LLP. All rights reserved.</p>
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      let countdown = 5;
-      const countdownEl = document.getElementById('redirectCountdown');
-      const redirectUrl = location.pathname.replace(/thankyou\.html$/, 'index.html');
-
-      const interval = setInterval(() => {
-        countdown -= 1;
-        if (countdownEl) {
-          countdownEl.innerHTML = `Redirecting to home in <strong>${countdown}</strong> seconds...`;
-        }
-        if (countdown <= 0) {
-          clearInterval(interval);
-          window.location.replace(redirectUrl);
-        }
-      }, 1000);
-    });
-  </script>
   <script src="js/main.js"></script>
 </body>
 </html>

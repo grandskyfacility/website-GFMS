@@ -3,18 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://fonts.gstatic.com https://api.web3forms.com; form-action https://api.web3forms.com; frame-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>GrandSky Facility & Management Services LLP</title>
-  <meta name="description" content="Professional facility management solutions — security, surveillance, MEP maintenance, solar power and more. Serving 100+ facilities across India." />
+  <meta name="description" content="Professional facility management solutions — security, surveillance, MEP maintenance, solar power and more. Serving 200+ facilities across India." />
+  <meta name="theme-color" content="#1a2d5a" />
   <link rel="icon" href="images/logo.png" type="image/png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GrandSky Facility & Management Services LLP" />
+  <meta property="og:description" content="Integrated facility management — security, surveillance, MEP, solar and more. Your trusted partner across 200+ facilities in India." />
+  <meta property="og:image" content="images/logo.png" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
+  <noscript><style>.fade-up,.reveal,.reveal-left,.reveal-right,.zoom-in{opacity:1 !important;transform:none !important}.faq-a{max-height:none !important}</style></noscript>
 </head>
 <body>
+
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <!-- ======== HEADER ======== -->
   <header class="header" id="header">
@@ -31,10 +44,15 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="pages/about.html">About</a></li>
         <li><a href="pages/services.html">Services</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="pages/contact.html">Contact</a></li>
       </ul>
 
       <div class="nav-cta">
+        <a href="tel:+919810031191" class="nav-phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.09 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>+91 98100 31191</span>
+        </a>
         <a href="pages/contact.html" class="btn btn-primary">Get a Quote
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -49,96 +67,156 @@
       <a href="index.html">Home</a>
       <a href="pages/about.html">About</a>
       <a href="pages/services.html">Services</a>
+      <a href="#faq">FAQ</a>
       <a href="pages/contact.html">Contact</a>
       <a href="pages/contact.html" class="btn btn-primary">Get a Quote</a>
     </nav>
   </header>
 
+  <main>
   <!-- ======== HERO ======== -->
   <section class="hero">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+
     <div class="container">
       <div class="hero-grid">
         <!-- Left -->
         <div class="hero-content">
           <div class="hero-badge">
             <span class="dot"></span>
-            Professional Facility Management Since 2021
+            Trusted facility partner since 2021
           </div>
 
-          <h1 class="hero-title">Building excellence through <span>trusted management</span></h1>
+          <h1 class="hero-title">Facilities that run <span>flawlessly</span>, every single day</h1>
 
           <p class="hero-desc">
-            GrandSky delivers end-to-end facility management — security, surveillance, MEP maintenance, solar power and more. Your trusted partner across 200+ facilities in India.
+            GrandSky delivers integrated facility management — security, surveillance, MEP maintenance,
+            solar power and more — from a single, accountable partner. Keeping 200+ facilities across
+            India safe, efficient and fully operational.
           </p>
 
           <div class="hero-actions">
-            <a href="pages/contact.html" class="btn btn-primary">
-              Get Started Today
+            <a href="pages/contact.html" class="btn btn-primary btn-lg">
+              Get Your Free Quote
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a href="pages/services.html" class="btn btn-outline">Explore Services</a>
+            <a href="pages/services.html" class="btn btn-outline btn-lg">Explore Services</a>
           </div>
 
-          <div class="hero-stats">
-            <div class="stat-item">
-              <div class="stat-num"><span data-target="200" data-suffix="+">0+</span></div>
-              <div class="stat-label">Facilities Managed</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num"><span data-target="5" data-suffix="+">0+</span></div>
-              <div class="stat-label">Years Experience</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num">24/7</div>
-              <div class="stat-label">Emergency Support</div>
+          <div class="hero-trust">
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-num"><span data-target="200" data-suffix="+">0+</span></div>
+                <div class="stat-label">Facilities Managed</div>
+              </div>
+              <div class="hero-stat-divider" aria-hidden="true"></div>
+              <div class="stat-item">
+                <div class="stat-num"><span data-target="8" data-suffix="">0</span></div>
+                <div class="stat-label">Service Verticals</div>
+              </div>
+              <div class="hero-stat-divider" aria-hidden="true"></div>
+              <div class="stat-item">
+                <div class="stat-num">24/7</div>
+                <div class="stat-label">Emergency Support</div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Right visual -->
         <div class="hero-visual">
-          <div class="float-badge float-badge-1">
-            <div class="val" data-target="200" data-suffix="+">0+</div>
-            <div class="lbl">Facilities Managed</div>
+          <div class="hero-float-a">
+            <span class="hf-num">99.9%</span>
+            <span class="hf-lbl">Uptime</span>
           </div>
 
-          <div class="hero-card">
-            <img src="images/logo.png" alt="GrandSky" class="hero-card-logo" />
-            <h3>GrandSky</h3>
-            <p>Facility &amp; Management Services LLP</p>
-            <div class="hero-services-grid">
-              <div class="hero-service-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                Security
+          <div class="ops-card">
+            <div class="ops-head">
+              <div>
+                <div class="ops-title">Live Facility Status</div>
+                <div class="ops-sub">Across all managed sites</div>
               </div>
-              <div class="hero-service-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M20.188 10.934l-1.96-1.96-7.228 7.228 1.96 1.96zM9 11H7a2 2 0 00-2 2v0a2 2 0 002 2h2"/><circle cx="12" cy="12" r="9"/></svg>
-                Surveillance
+              <div class="ops-status"><span class="ops-dot"></span> Operational</div>
+            </div>
+
+            <div class="ops-metrics">
+              <div class="ops-metric">
+                <div class="ops-metric-val"><span data-target="200" data-suffix="+">0+</span></div>
+                <div class="ops-metric-lbl">Sites online</div>
               </div>
-              <div class="hero-service-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-                MEP
+              <div class="ops-metric">
+                <div class="ops-metric-val">1 hr</div>
+                <div class="ops-metric-lbl">Emergency response</div>
               </div>
-              <div class="hero-service-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                Solar Power
+              <div class="ops-metric">
+                <div class="ops-metric-val"><span data-target="98" data-suffix="%">0%</span></div>
+                <div class="ops-metric-lbl">Client retention</div>
               </div>
-              <div class="hero-service-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-                Battery &amp; UPS
+              <div class="ops-metric">
+                <div class="ops-metric-val"><span data-target="500" data-suffix="+">0+</span></div>
+                <div class="ops-metric-lbl">Professionals</div>
               </div>
-              <div class="hero-service-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                Vendor Mgmt
+            </div>
+
+            <div class="ops-bars">
+              <div class="ops-bar-row">
+                <span class="ops-bar-lbl">Security coverage</span>
+                <span class="ops-bar-pct">100%</span>
+                <div class="ops-bar"><span style="--w:100%"></span></div>
+              </div>
+              <div class="ops-bar-row">
+                <span class="ops-bar-lbl">CCTV nodes online</span>
+                <span class="ops-bar-pct">98%</span>
+                <div class="ops-bar"><span style="--w:98%"></span></div>
+              </div>
+              <div class="ops-bar-row">
+                <span class="ops-bar-lbl">Power backup ready</span>
+                <span class="ops-bar-pct">100%</span>
+                <div class="ops-bar"><span style="--w:100%"></span></div>
               </div>
             </div>
           </div>
 
-          <div class="float-badge float-badge-2">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            ISO Certified Professionals
+          <div class="hero-float-b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg>
+            Licensed &amp; insured team
           </div>
         </div>
+      </div>
+    </div>
+
+    <a href="#services" class="hero-scroll" aria-label="Scroll to services">
+      <span>Discover more</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+  </section>
+
+  <!-- ======== TRUST / SECTORS MARQUEE ======== -->
+  <section class="trust-strip" aria-label="Sectors we serve">
+    <div class="container">
+      <p class="trust-strip-label">Trusted across the facilities that keep India running</p>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span class="sector-chip"><i></i>Corporate Offices</span>
+        <span class="sector-chip"><i></i>Hospitals &amp; Healthcare</span>
+        <span class="sector-chip"><i></i>Industrial Plants</span>
+        <span class="sector-chip"><i></i>Educational Institutions</span>
+        <span class="sector-chip"><i></i>Commercial Complexes</span>
+        <span class="sector-chip"><i></i>Residential Societies</span>
+        <span class="sector-chip"><i></i>Hotels &amp; Hospitality</span>
+        <span class="sector-chip"><i></i>Warehouses &amp; Logistics</span>
+        <!-- duplicate set for seamless loop -->
+        <span class="sector-chip" aria-hidden="true"><i></i>Corporate Offices</span>
+        <span class="sector-chip" aria-hidden="true"><i></i>Hospitals &amp; Healthcare</span>
+        <span class="sector-chip" aria-hidden="true"><i></i>Industrial Plants</span>
+        <span class="sector-chip" aria-hidden="true"><i></i>Educational Institutions</span>
+        <span class="sector-chip" aria-hidden="true"><i></i>Commercial Complexes</span>
+        <span class="sector-chip" aria-hidden="true"><i></i>Residential Societies</span>
+        <span class="sector-chip" aria-hidden="true"><i></i>Hotels &amp; Hospitality</span>
+        <span class="sector-chip" aria-hidden="true"><i></i>Warehouses &amp; Logistics</span>
       </div>
     </div>
   </section>
@@ -147,13 +225,13 @@
   <section class="section" id="services">
     <div class="container">
       <div class="text-center">
-        <span class="section-label">What We Offer</span>
-        <h2 class="section-title">Comprehensive Facility Management</h2>
-        <p class="section-subtitle">From security to solar power — end-to-end solutions designed for operational excellence and cost efficiency.</p>
+        <span class="section-label reveal">What We Offer</span>
+        <h2 class="section-title reveal" style="--d:.05s">Comprehensive Facility Management</h2>
+        <p class="section-subtitle reveal" style="--d:.1s">From security to solar power — end-to-end solutions designed for operational excellence and cost efficiency.</p>
       </div>
 
       <div class="services-grid">
-        <div class="card service-card fade-up">
+        <div class="card service-card fade-up" style="--d:0s">
           <div class="icon-box icon-box-navy">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
@@ -162,7 +240,7 @@
           <a href="pages/services.html#security" class="link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
 
-        <div class="card service-card fade-up">
+        <div class="card service-card fade-up" style="--d:.08s">
           <div class="icon-box icon-box-teal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
           </div>
@@ -171,7 +249,7 @@
           <a href="pages/services.html#surveillance" class="link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
 
-        <div class="card service-card fade-up">
+        <div class="card service-card fade-up" style="--d:.16s">
           <div class="icon-box icon-box-sky">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
           </div>
@@ -180,7 +258,7 @@
           <a href="pages/services.html#battery" class="link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
 
-        <div class="card service-card fade-up">
+        <div class="card service-card fade-up" style="--d:.24s">
           <div class="icon-box icon-box-green">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6L2 12l6 6"/><path d="M16 6l6 6-6 6"/></svg>
           </div>
@@ -189,7 +267,7 @@
           <a href="pages/services.html#mep" class="link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
 
-        <div class="card service-card fade-up">
+        <div class="card service-card fade-up" style="--d:0s">
           <div class="icon-box icon-box-navy">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
           </div>
@@ -198,13 +276,22 @@
           <a href="pages/services.html#solar" class="link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
 
-        <div class="card service-card fade-up">
+        <div class="card service-card fade-up" style="--d:.08s">
           <div class="icon-box icon-box-teal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <h4>Vendor Management</h4>
           <p>Strategic vendor coordination and contract management to optimise costs and service quality.</p>
           <a href="pages/services.html#vendor" class="link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+
+        <div class="card service-card fade-up" style="--d:.16s">
+          <div class="icon-box icon-box-sky">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          </div>
+          <h4>Manpower Services</h4>
+          <p>Trained, background-verified staff — housekeeping, technicians, pantry and support — deployed and supervised at your site.</p>
+          <a href="pages/services.html#manpower" class="link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
@@ -216,12 +303,40 @@
     </div>
   </section>
 
+  <!-- ======== IMPACT / STATS BAND ======== -->
+  <section class="impact-band">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">Measurable Results</span>
+        <h2 class="section-title" style="color:#fff;">Performance You Can Count On</h2>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-item fade-up" style="--d:0s">
+          <div class="impact-num"><span data-target="200" data-suffix="+">0+</span></div>
+          <div class="impact-lbl">Facilities managed</div>
+        </div>
+        <div class="impact-item fade-up" style="--d:.08s">
+          <div class="impact-num"><span data-target="98" data-suffix="%">0%</span></div>
+          <div class="impact-lbl">Client retention</div>
+        </div>
+        <div class="impact-item fade-up" style="--d:.16s">
+          <div class="impact-num">1 hr</div>
+          <div class="impact-lbl">Emergency response</div>
+        </div>
+        <div class="impact-item fade-up" style="--d:.24s">
+          <div class="impact-num">24/7</div>
+          <div class="impact-lbl">Support coverage</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ======== ABOUT SNIPPET ======== -->
   <section class="section" id="about" style="background: var(--white);">
     <div class="container">
       <div class="about-grid">
         <!-- Visual -->
-        <div class="about-visual fade-up">
+        <div class="about-visual reveal-left">
           <div class="about-img-wrap">
             <img src="images/logo.png" alt="GrandSky" />
           </div>
@@ -238,7 +353,7 @@
         </div>
 
         <!-- Content -->
-        <div class="about-content fade-up">
+        <div class="about-content reveal-right">
           <span class="section-label">About GrandSky</span>
           <h2 class="section-title">Transforming Facility Management Since 2021</h2>
           <p style="color: var(--text-muted); margin-bottom: 0.5rem;">
@@ -279,6 +394,115 @@
     </div>
   </section>
 
+  <!-- ======== PROCESS ======== -->
+  <section class="section process-section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label reveal">How We Work</span>
+        <h2 class="section-title reveal" style="--d:.05s">Onboarded in Four Simple Steps</h2>
+        <p class="section-subtitle reveal" style="--d:.1s">A clear, proven process that takes you from first conversation to a fully managed facility — without disruption.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card fade-up" style="--d:0s">
+          <div class="process-step">01</div>
+          <div class="icon-box icon-box-sky">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h4>Site Survey &amp; Consultation</h4>
+          <p>We visit your facility, assess your requirements and challenges, and understand exactly what success looks like for you.</p>
+        </div>
+        <div class="process-card fade-up" style="--d:.08s">
+          <div class="process-step">02</div>
+          <div class="icon-box icon-box-teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h4>Tailored Plan &amp; Proposal</h4>
+          <p>You receive a custom scope, service package and transparent quote — designed to your scale, budget and priorities.</p>
+        </div>
+        <div class="process-card fade-up" style="--d:.16s">
+          <div class="process-step">03</div>
+          <div class="icon-box icon-box-navy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+          </div>
+          <h4>Deployment &amp; Mobilisation</h4>
+          <p>Our trained teams, systems and reporting are deployed quickly and safely, with a smooth handover from day one.</p>
+        </div>
+        <div class="process-card fade-up" style="--d:.24s">
+          <div class="process-step">04</div>
+          <div class="icon-box icon-box-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>Monitor &amp; Report</h4>
+          <p>Continuous monitoring, scheduled audits and clear performance reporting keep your facility running at its best.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SERVICE COMMITMENTS ======== -->
+  <section class="section commit-section" id="commitments">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label reveal">Our Promises</span>
+        <h2 class="section-title reveal" style="--d:.05s">What You're Guaranteed From Day One</h2>
+        <p class="section-subtitle reveal" style="--d:.1s">Facility management is a trust business. These are the standards we hold ourselves to on every contract — written into your agreement, not just our brochure.</p>
+      </div>
+
+      <div class="commit-grid">
+        <div class="commit-card fade-up" style="--d:0s">
+          <div class="icon-box icon-box-navy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+          </div>
+          <h4>One Accountable Partner</h4>
+          <p>A single contract and a single point of contact across every vertical — no juggling three vendors when something breaks.</p>
+        </div>
+
+        <div class="commit-card fade-up" style="--d:.08s">
+          <div class="icon-box icon-box-teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h4>1-Hour Emergency Response</h4>
+          <p>Standby teams and spare inventory on call 24/7, 365 days a year, with a one-hour target response for critical incidents.</p>
+        </div>
+
+        <div class="commit-card fade-up" style="--d:.16s">
+          <div class="icon-box icon-box-sky">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h4>Transparent Reporting</h4>
+          <p>Scheduled audits and clear monthly performance reports with real KPIs — so you always know exactly what you're paying for.</p>
+        </div>
+
+        <div class="commit-card fade-up" style="--d:0s">
+          <div class="icon-box icon-box-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg>
+          </div>
+          <h4>Vetted, Licensed &amp; Insured Staff</h4>
+          <p>Every team member is background-checked, trained for your facility type, and covered — so you carry no unnecessary risk.</p>
+        </div>
+
+        <div class="commit-card fade-up" style="--d:.08s">
+          <div class="icon-box icon-box-navy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>
+          </div>
+          <h4>Fixed, Itemised Pricing</h4>
+          <p>Clear, upfront scope and pricing agreed before we start. You pay for what you approve — never for surprise add-ons.</p>
+        </div>
+
+        <div class="commit-card fade-up" style="--d:.16s">
+          <div class="icon-box icon-box-teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h4>Free Site Survey First</h4>
+          <p>We assess your facility and challenges on site and give you a tailored proposal — with no obligation to proceed.</p>
+        </div>
+      </div>
+
+      <p class="commit-note fade-up">Serving Delhi NCR and clients across India &middot; Founded 2021 &middot; 200+ facilities managed</p>
+    </div>
+  </section>
+
   <!-- ======== WHY CHOOSE US ======== -->
   <section class="section why-section">
     <div class="container">
@@ -289,42 +513,42 @@
       </div>
 
       <div class="why-grid">
-        <div class="why-card fade-up">
+        <div class="why-card fade-up" style="--d:0s">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h4>Proven Track Record</h4>
           <p>5+ years managing diverse facilities across multiple industries with consistently high satisfaction.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up" style="--d:.08s">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <h4>24/7 Emergency Support</h4>
           <p>Round-the-clock dedicated support with certified professionals and 1-hour emergency response.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up" style="--d:.16s">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h4>Advanced Technology</h4>
           <p>Real-time monitoring, data analytics, and smart systems that keep your facility running smoothly.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up" style="--d:0s">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
           </div>
           <h4>Integrated Solutions</h4>
           <p>Seamless coordination across all facility functions from a single, accountable partner.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up" style="--d:.08s">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 16v-4M12 8h.01"/></svg>
           </div>
           <h4>Sustainability Focus</h4>
           <p>Eco-friendly practices and renewable energy solutions that reduce your carbon footprint and costs.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up" style="--d:.16s">
           <div class="icon-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
@@ -335,136 +559,95 @@
     </div>
   </section>
 
-  <!-- ======== CONTACT SNIPPET ======== -->
-  <section class="section" id="contact">
+  <!-- ======== FAQ ======== -->
+  <section class="section" id="faq">
     <div class="container">
-      <div class="text-center" style="margin-bottom:3rem;">
-        <span class="section-label">Get in Touch</span>
-        <h2 class="section-title">Ready to Transform Your Facility?</h2>
-        <p class="section-subtitle">Have questions? Our team is ready to help you find the right solution for your property.</p>
+      <div class="text-center">
+        <span class="section-label reveal">Questions</span>
+        <h2 class="section-title reveal" style="--d:.05s">Frequently Asked Questions</h2>
+        <p class="section-subtitle reveal" style="--d:.1s">Everything a facility owner usually wants to know before getting started.</p>
       </div>
 
-      <div class="contact-grid">
-        <!-- Info -->
-        <div class="contact-info-card fade-up">
-          <h3>Contact Information</h3>
-          <p>Reach out through any of these channels and we'll respond promptly.</p>
-
-          <div class="contact-info-list">
-            <div class="contact-info-item">
-              <div class="icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.09 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              </div>
-              <div>
-                <div class="info-label">Phone</div>
-                <div class="info-value">+91 9810031191<br/>+91 9910031191</div>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              </div>
-              <div>
-                <div class="info-label">Email</div>
-                <div class="info-value">customer@grandskyfacility.com<br/>grandskyfacility@gmail.com</div>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <div class="info-label">Office</div>
-                <div class="info-value">E516 Greater Kailash 2 Block East<br/>Greater Kailash, New Delhi 110048</div>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div>
-                <div class="info-label">Hours</div>
-                <div class="info-value">Mon–Fri: 8:00 AM – 6:00 PM<br/><span style="color:var(--teal-light);">24/7 Emergency Available</span></div>
-              </div>
-            </div>
-          </div>
-
-          <hr class="contact-divider" />
-          <div class="response-times">
-            <h4>Response Times</h4>
-            <div class="response-item"><span class="ri-label">General Inquiries</span><span class="ri-time">24–48 hrs</span></div>
-            <div class="response-item"><span class="ri-label">Service Requests</span><span class="ri-time">Same day</span></div>
-            <div class="response-item"><span class="ri-label">Emergency Issues</span><span class="ri-time">1 hour</span></div>
-          </div>
+      <div class="faq-list">
+        <div class="faq-item fade-up">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>Which types of facilities do you manage?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><p>We manage corporate offices, hospitals and healthcare facilities, industrial plants, educational institutions, commercial complexes, residential societies, hotels and logistics warehouses. Our teams are trained across sectors, so we adapt to the specific compliance and operational needs of your facility.</p></div>
         </div>
 
-        <!-- Form -->
-        <div class="contact-form-wrap fade-up">
-          <h3>Send Us a Message</h3>
-          <p>Fill out the form below and our team will get back to you shortly.</p>
+        <div class="faq-item fade-up">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>Can I take just one service instead of the full package?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><p>Absolutely. You can engage a single service such as security guarding or solar power, or combine several verticals into one integrated contract. Our value comes from flexibility — you choose the scope, and we coordinate it under a single accountable partner.</p></div>
+        </div>
 
-          <div id="formSuccess" class="form-success">
-            <div class="checkmark">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <h3>Message Received!</h3>
-            <p>Thank you for reaching out to GrandSky Facility. One of our team members will get back to you shortly.</p>
+        <div class="faq-item fade-up">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>How quickly can you deploy a team?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><p>After a site survey and confirmation, we typically mobilise within days rather than weeks. Urgent requirements can often be met faster — talk to us and we will confirm a realistic timeline for your facility.</p></div>
+        </div>
+
+        <div class="faq-item fade-up">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>How do you handle emergencies?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><p>Every client gets access to our 24/7 emergency line with a target one-hour response for critical issues. We maintain standby teams, spare inventory and escalation protocols so incidents are contained quickly and reported transparently.</p></div>
+        </div>
+
+        <div class="faq-item fade-up">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>How do you ensure quality and accountability?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><p>We use scheduled audits, real-time monitoring, and periodic performance reporting with clear KPIs. Every service is delivered by licensed, certified and insured professionals, and you always have a single point of contact who owns the outcome.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-cta">
+        <p>Still have a question?</p>
+        <a href="pages/contact.html" class="btn btn-primary">Talk to our team
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CONTACT / CTA ======== -->
+  <section class="section" id="contact" style="padding-top:0;">
+    <div class="container">
+      <div class="cta-band fade-up">
+        <div class="cta-band-glow" aria-hidden="true"></div>
+        <div class="cta-band-content">
+          <span class="section-label" style="color:rgba(255,255,255,0.8);">Ready When You Are</span>
+          <h2>Ready to Transform Your Facility?</h2>
+          <p>Get a free site assessment and a tailored proposal. Our team responds to every enquiry within 24–48 hours — and emergencies within the hour.</p>
+          <div class="btn-group">
+            <a href="pages/contact.html" class="btn btn-white btn-lg">
+              Get a Free Quote
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="tel:+919810031191" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,0.5); color:#fff;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.09 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              Call +91 98100 31191
+            </a>
           </div>
-
-          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-redirect="thankyou.html">
-            <input type="hidden" name="access_key" value="777708b8-949b-42d0-9870-a28c7141ee16">
-            <input type="hidden" name="redirect" value="thankyou.html">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required />
-              </div>
-              <div class="form-group">
-                <label for="company">Company Name *</label>
-                <input type="text" id="company" name="company" placeholder="Your Company" required />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" placeholder="email@example.com" required />
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="service">Service Interest *</label>
-              <select id="service" name="service" required>
-                <option value="">-- Select a Service --</option>
-                <option value="security">Security Guarding</option>
-                <option value="surveillance">Surveillance &amp; Security</option>
-                <option value="battery">Battery &amp; UPS</option>
-                <option value="ac">Air Conditioning</option>
-                <option value="mep">MEP Maintenance</option>
-                <option value="vendor">Vendor Management</option>
-                <option value="solar">Solar Power Solutions</option>
-                <option value="consultation">General Consultation</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="message">Message *</label>
-              <textarea id="message" name="message" placeholder="Tell us about your facility management needs..." required></textarea>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" id="privacy" name="privacy" required />
-              <label for="privacy">I agree to the privacy policy and consent to being contacted by GrandSky Facility &amp; Management Services LLP.</label>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
-              Send Message
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
-          </form>
+          <div class="cta-assurances">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Free site survey</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No obligation quote</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Licensed &amp; insured teams</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- ======== FOOTER ======== -->
   <footer class="footer">
@@ -490,6 +673,7 @@
             <li><a href="pages/services.html#mep">MEP Maintenance</a></li>
             <li><a href="pages/services.html#solar">Solar Power</a></li>
             <li><a href="pages/services.html#vendor">Vendor Management</a></li>
+            <li><a href="pages/services.html#manpower">Manpower Services</a></li>
           </ul>
         </div>
 
@@ -499,6 +683,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="pages/about.html">About Us</a></li>
             <li><a href="pages/services.html">All Services</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="pages/contact.html">Contact</a></li>
           </ul>
         </div>
@@ -524,6 +709,22 @@
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <!-- Sticky mobile conversion bar -->
+  <div class="mobile-cta">
+    <a href="tel:+919810031191" class="btn btn-outline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.09 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call Now
+    </a>
+    <a href="pages/contact.html" class="btn btn-primary">
+      Get a Free Quote
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </button>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

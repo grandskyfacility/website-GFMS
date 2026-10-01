@@ -2,158 +2,300 @@
    GRANDSKY — Main JavaScript
    ============================================ */
 
-/* ---------- Header scroll effect ---------- */
-const header = document.getElementById('header');
-if (header) {
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
-  });
-}
+(function () {
+  'use strict';
 
-/* ---------- Mobile menu toggle ---------- */
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
+  /* ---------- Header + scroll progress + back-to-top ---------- */
+  const header = document.getElementById('header');
+  const progress = document.getElementById('scrollProgress');
+  const toTop = document.getElementById('toTop');
 
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-  });
+  function onScroll() {
+    const y = window.scrollY;
+    if (header) header.classList.toggle('scrolled', y > 40);
 
-  // Close on link click
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    });
-  });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!header.contains(e.target)) {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
+    if (progress) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (y / docHeight) * 100 : 0;
+      progress.style.width = pct + '%';
     }
-  });
-}
 
-/* ---------- Active nav link ---------- */
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
-  const href = link.getAttribute('href');
-  if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-    link.classList.add('active');
+    if (toTop) toTop.classList.toggle('show', y > 600);
   }
-});
 
-/* ---------- Scroll-triggered fade animations ---------- */
-const fadeEls = document.querySelectorAll('.fade-up');
-if (fadeEls.length) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-        observer.unobserve(el.target);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (toTop) {
+    toTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ---------- Mobile menu toggle ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (header && !header.contains(e.target)) {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
       }
     });
-  }, { threshold: 0.12 });
+  }
 
-  fadeEls.forEach(el => observer.observe(el));
-}
+  /* ---------- Active nav link ---------- */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+      link.classList.add('active');
+    }
+  });
 
-/* ---------- Contact Form ---------- */
-const web3Forms = document.querySelectorAll('form[data-redirect]');
-if (web3Forms.length) {
-  web3Forms.forEach((form) => {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  /* ---------- Scroll reveal: auto-stagger then observe ---------- */
+  const REVEAL_SELECTOR = '.fade-up, .reveal, .reveal-left, .reveal-right, .zoom-in';
+  const revealEls = document.querySelectorAll(REVEAL_SELECTOR);
 
-      const btn = form.querySelector('button[type="submit"]');
-      if (!btn) {
+  // Give grouped elements a cascade delay unless one is set inline.
+  const seenParents = new WeakSet();
+  revealEls.forEach(el => {
+    if (el.style.getPropertyValue('--d')) return;
+    const parent = el.parentElement;
+    if (!parent || seenParents.has(parent)) return;
+    const siblings = Array.from(parent.children).filter(c => c.matches(REVEAL_SELECTOR));
+    if (siblings.length > 1) {
+      siblings.forEach((sib, i) => {
+        if (!sib.style.getPropertyValue('--d')) {
+          sib.style.setProperty('--d', (Math.min(i, 5) * 0.08).toFixed(2) + 's');
+        }
+      });
+      seenParents.add(parent);
+    }
+  });
+
+  if (revealEls.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+
+  /* ---------- Hero status card bars ---------- */
+  const opsCard = document.querySelector('.ops-card');
+  if (opsCard && 'IntersectionObserver' in window) {
+    const opsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          opsCard.classList.add('loaded');
+          opsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    opsObserver.observe(opsCard);
+  } else if (opsCard) {
+    opsCard.classList.add('loaded');
+  }
+
+  /* ---------- FAQ accordion ---------- */
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const panel = item.querySelector('.faq-a');
+    if (!btn || !panel) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+
+      // Close any other open item for a clean single-open accordion.
+      faqItems.forEach(other => {
+        if (other !== item && other.classList.contains('open')) {
+          other.classList.remove('open');
+          const otherPanel = other.querySelector('.faq-a');
+          const otherBtn = other.querySelector('.faq-q');
+          if (otherPanel) otherPanel.style.maxHeight = '';
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('open');
+        panel.style.maxHeight = '';
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ---------- Stat counter animation ---------- */
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    if (isNaN(target)) return;
+    const duration = 1800;
+    const start = performance.now();
+    const suffix = el.dataset.suffix || '';
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      el.textContent = Math.round(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const counters = document.querySelectorAll('[data-target]');
+  if (counters.length) {
+    if ('IntersectionObserver' in window) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(el => counterObserver.observe(el));
+    } else {
+      counters.forEach(animateCounter);
+    }
+  }
+
+  /* ---------- Smooth scroll for in-page anchors ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') return;
+      let target = null;
+      try {
+        target = document.querySelector(href);
+      } catch (err) {
         return;
       }
-
-      const originalText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sending...`;
-
-      const formData = new FormData(form);
-      if (!formData.has('access_key')) {
-        formData.append('access_key', '777708b8-949b-42d0-9870-a28c7141ee16');
+      if (target) {
+        e.preventDefault();
+        const offset = 84; // header height
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       }
+    });
+  });
 
-      try {
-        const response = await fetch(form.action || 'https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: formData
-        });
+  /* ---------- Thank-you countdown redirect ---------- */
+  const countdownEl = document.getElementById('redirectSeconds');
+  if (countdownEl) {
+    let countdown = 5;
+    const redirectUrl = location.pathname.replace(/thankyou\.html$/, 'index.html');
+    const interval = setInterval(() => {
+      countdown -= 1;
+      countdownEl.textContent = String(Math.max(countdown, 0));
+      if (countdown <= 0) {
+        clearInterval(interval);
+        window.location.replace(redirectUrl);
+      }
+    }, 1000);
+  }
 
-        const data = await response.json();
+  /* ---------- Contact form (Web3Forms, hardened) ---------- */
+  // Only strip markup that could ever be echoed back into the page.
+  function clean(value, max) {
+    return String(value == null ? '' : value).replace(/[\u0000-\u001F\u007F]/g, '').trim().slice(0, max || 2000);
+  }
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-        if (response.ok && data.success) {
-          const redirect = form.dataset.redirect || 'thankyou.html';
-          window.location.href = redirect;
+  const web3Forms = document.querySelectorAll('form[data-redirect]');
+  if (web3Forms.length) {
+    web3Forms.forEach((form) => {
+      const loadedAt = Date.now();
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Bot trap: a hidden checkbox real users never touch, plus a speed check.
+        const trap = form.querySelector('input[name="botcheck"]');
+        if (trap && trap.checked) return;
+        if (Date.now() - loadedAt < 1800) return;
+
+        const btn = form.querySelector('button[type="submit"]');
+        if (!btn) return;
+
+        // Sanitise + bound every field before it leaves the browser.
+        const formData = new FormData(form);
+        formData.delete('botcheck');
+        for (const [key, value] of formData.entries()) {
+          if (typeof value === 'string') formData.set(key, clean(value, 3000));
+        }
+        const email = clean(formData.get('email'), 254);
+        if (email && !EMAIL_RE.test(email)) {
+          alert('Please enter a valid email address.');
           return;
         }
+        if (!formData.has('access_key')) {
+          formData.append('access_key', '777708b8-949b-42d0-9870-a28c7141ee16');
+        }
 
-        const message = data.message || 'Unable to submit the form. Please try again later.';
-        alert(`Error: ${message}`);
-      } catch (error) {
-        alert('Something went wrong. Please try again.');
-        console.error('Web3Forms submit error', error);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-      }
+        const originalMarkup = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sending...';
+
+        try {
+          const response = await fetch(form.action || 'https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData,
+            headers: { Accept: 'application/json' }
+          });
+
+          const data = await response.json().catch(() => ({}));
+
+          if (response.ok && data.success) {
+            const redirect = form.dataset.redirect || 'thankyou.html';
+            window.location.href = redirect;
+            return;
+          }
+
+          // Never trust remote text as markup — strip tags before showing it.
+          const message = clean(data.message || 'Unable to submit the form. Please try again later.', 300)
+            .replace(/[<>]/g, '');
+          alert('Error: ' + message);
+        } catch (error) {
+          alert('Something went wrong. Please try again.');
+          console.error('Web3Forms submit error', error);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = originalMarkup;
+        }
+      });
     });
-  });
-}
-
-/* ---------- Stat counter animation ---------- */
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target, 10);
-  const duration = 1800;
-  const start = performance.now();
-  const suffix = el.dataset.suffix || '';
-
-  function update(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-    el.textContent = Math.round(eased * target) + suffix;
-    if (progress < 1) requestAnimationFrame(update);
   }
-  requestAnimationFrame(update);
-}
 
-const counters = document.querySelectorAll('[data-target]');
-if (counters.length) {
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        counterObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  counters.forEach(el => counterObserver.observe(el));
-}
-
-/* ---------- Smooth scroll for anchor links ---------- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const offset = 80; // header height
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  });
-});
-
-/* ---------- CSS for spinner ---------- */
-const style = document.createElement('style');
-style.textContent = `.spin { animation: spin 1s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } }`;
-document.head.appendChild(style);
+  /* ---------- Spinner keyframes ---------- */
+  const style = document.createElement('style');
+  style.textContent = '.spin { animation: spin 1s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } }';
+  document.head.appendChild(style);
+})();

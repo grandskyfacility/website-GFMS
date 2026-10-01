@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://fonts.gstatic.com https://api.web3forms.com; form-action https://api.web3forms.com; frame-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Contact — GrandSky Facility & Management Services LLP</title>
   <meta name="description" content="Contact GrandSky Facility & Management Services LLP. Get in touch for a free quote or to discuss your facility management needs." />
   <link rel="icon" href="logo.png" type="image/png" />
@@ -10,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
+  <noscript><style>.fade-up,.reveal,.reveal-left,.reveal-right,.zoom-in{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
 
@@ -27,6 +30,7 @@
         <li><a href="../index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="services.html">Services</a></li>
+        <li><a href="../index.html#faq">FAQ</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta">
@@ -42,6 +46,7 @@
       <a href="../index.html">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
+      <a href="../index.html#faq">FAQ</a>
       <a href="contact.html">Contact</a>
       <a href="contact.html" class="btn btn-primary">Get a Quote</a>
     </nav>
@@ -61,7 +66,7 @@
     <div class="container">
       <div class="contact-grid">
         <!-- Info -->
-        <div class="contact-info-card fade-up">
+        <div class="contact-info-card reveal-left">
           <h3>Contact Information</h3>
           <p>Reach out through any of these channels and we'll respond promptly.</p>
 
@@ -168,7 +173,7 @@
         </div>
 
         <!-- Form -->
-        <div class="contact-form-wrap fade-up">
+        <div class="contact-form-wrap reveal-right">
           <h3>Send Us a Message</h3>
           <p>Fill in the form below and we'll get back to you with the right solution for your facility.</p>
 
@@ -183,6 +188,9 @@
  <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-redirect="../thankyou.html">
   <input type="hidden" name="access_key" value="777708b8-949b-42d0-9870-a28c7141ee16">
   <input type="hidden" name="redirect" value="../thankyou.html">
+  <input type="hidden" name="subject" value="New enquiry from grandskyfacility.com">
+  <!-- Bot trap: hidden from humans and screen readers, never submitted intentionally -->
+  <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Full Name *</label>
@@ -209,6 +217,7 @@
                 <select id="service" name="service" required>
                   <option value="">-- Select a Service --</option>
                   <option value="security">Security Guarding</option>
+                  <option value="manpower">Manpower Services</option>
                   <option value="surveillance">Surveillance &amp; Security</option>
                   <option value="battery">Battery &amp; UPS</option>
                   <option value="ac">Air Conditioning</option>
@@ -250,7 +259,7 @@
       <div class="map-placeholder fade-up">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <p>E516 Greater Kailash 2 Block East, Greater Kailash, New Delhi 110048 India</p>
-        <a href="https://maps.app.goo.gl/f7eUTvFw4PfRZbiJ8" target="_blank" rel="noopener">
+        <a href="https://maps.app.goo.gl/f7eUTvFw4PfRZbiJ8" target="_blank" rel="noopener noreferrer">
           Open in Google Maps →
         </a>
       </div>
@@ -280,6 +289,7 @@
             <li><a href="services.html#mep">MEP Maintenance</a></li>
             <li><a href="services.html#solar">Solar Power</a></li>
             <li><a href="services.html#vendor">Vendor Management</a></li>
+            <li><a href="services.html#manpower">Manpower Services</a></li>
           </ul>
         </div>
         <div class="footer-col">
