@@ -317,6 +317,27 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let lastFocused = null;
 
+    /* ---- debug helper: paste gsPromoDebug in the console to inspect state ---- */
+    const showState = () => {
+      console.log('gsPromoDebug:');
+      console.log('  promo hidden        :', promo.hidden);
+      console.log('  promo .open class   :', promo.classList.contains('open'));
+      console.log('  body promo-open     :', document.body.classList.contains('promo-open'));
+      console.log('  html.js            :', document.documentElement.classList.contains('js'));
+      console.log('  location.search    :', location.search);
+      console.log('  forceViaParam      :', forceViaParam);
+      try {
+        console.log('  stored gsPromoSeenAt :', localStorage.getItem(PROMO_KEY) || '(none)');
+      } catch (err) {
+        console.log('  localStorage        : unavailable (' + err.message + ')');
+      }
+    };
+    window.gsPromoDebug = showState;
+
+    const HOMEPAGE_PATH = new URL(location.href, window.location.origin).pathname.replace(/\/+$/, '');
+    const isHomepage = !HOMEPAGE_PATH.endsWith('thankyou.html') && (HOMEPAGE_PATH === '' || HOMEPAGE_PATH.endsWith('index.html'));
+    const forceViaParam = 'promo' in Object.fromEntries(new URLSearchParams(location.search));
+
     const seenRecently = () => {
       try {
         const stamp = Number(localStorage.getItem(PROMO_KEY) || 0);
@@ -325,8 +346,9 @@
         return false; // storage blocked — show it rather than hide the milestone
       }
     };
-    const rememberDismissed = () => {
+    const    rememberDismissed = () => {
       try { localStorage.setItem(PROMO_KEY, String(Date.now())); } catch (err) { /* ignore */ }
+      try { history.replaceState(null, '', location.pathname + location.search.replace(/[?&]promo=?(&|#|$)/, '$1').replace(/[?&]promo(&|#|$)/, '$1').replace(/^\?(&|$)/, '?').replace(/^&&/, '?')) } catch (err) { /* ignore */ }
     };
 
     const openPromo = () => {
@@ -385,7 +407,16 @@
       }
     });
 
-    if (!seenRecently()) setTimeout(openPromo, reduced ? 0 : 900);
+    const shouldShow = isHomepage && (forceViaParam || !seenRecently());
+    if (!shouldShow) {
+      console.log('gsPromo: not showing (not homepage, ?promo set, or recently dismissed).');
+    } else if (forceViaParam) {
+      console.log('gsPromo: forcing open via ?promo on the homepage.');
+      openPromo();
+    } else {
+      console.log('gsPromo: showing for a fresh, non-forced homepage visit.');
+      setTimeout(openPromo, reduced ? 0 : 900);
+    }
   }
 
   /* ---------- Spinner keyframes ---------- */
