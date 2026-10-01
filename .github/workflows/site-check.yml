@@ -1,0 +1,34 @@
+# Validates the hand-written static site before anything reaches main.
+#
+# There is no build step in this repo — the Pages workflow just uploads the
+# folder — so these checks are what stand between a typo and production.
+# scripts/check-site.mjs uses only Node built-ins, so no install step is needed.
+name: Site checks
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "site-check-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check JS, HTML, CSS, links and asset sizes
+        run: node scripts/check-site.mjs

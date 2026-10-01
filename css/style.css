@@ -1861,6 +1861,233 @@ textarea:focus-visible {
   .commit-note  { font-size: 0.78rem; }
 }
 
+/* ============================================
+   5-YEAR CELEBRATION PROMO (homepage only)
+   Ships hidden in the markup and is revealed by
+   main.js, so it never blocks content and never
+   needs a script to make the page readable.
+   ============================================ */
+.promo[hidden] { display: none; }
+.promo {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+body.promo-open { overflow: hidden; }
+
+.promo-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 17, 38, 0.66);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.promo.open .promo-backdrop { opacity: 1; }
+
+.promo-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 620px;
+  max-height: calc(100vh - 3rem);
+  max-height: calc(100dvh - 3rem); /* dynamic viewport on mobile browsers */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+  padding: 3rem 2.5rem 2.4rem;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(155deg, #0e1a3a 0%, var(--navy) 38%, #1d5570 72%, #23786e 100%);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 32px 90px rgba(6, 15, 36, 0.5);
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.45s cubic-bezier(.22, 1, .36, 1),
+              transform 0.45s cubic-bezier(.22, 1, .36, 1);
+}
+.promo.open .promo-card { opacity: 1; transform: none; }
+
+/* Falling confetti, clipped to the card */
+.promo-confetti { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+@keyframes promoFall {
+  0%   { transform: translateY(-24px) rotate(0deg); opacity: 0; }
+  14%  { opacity: 0.7; }
+  100% { transform: translateY(460px) rotate(420deg); opacity: 0; }
+}
+.promo-confetti span {
+  position: absolute;
+  top: -16px;
+  left: var(--x, 50%);
+  width: 8px; height: 14px;
+  border-radius: 2px;
+  background: var(--c, #fff);
+  opacity: 0;
+  animation: promoFall 5.5s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+
+/* Close button */
+.promo-close {
+  position: absolute;
+  top: 0.85rem; right: 0.85rem;
+  z-index: 3;
+  width: 40px; height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--white);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.promo-close:hover { background: rgba(255,255,255,0.22); transform: rotate(90deg); }
+.promo-close svg { width: 18px; height: 18px; }
+
+/* Anniversary medal */
+.promo-medal {
+  position: relative;
+  width: 108px; height: 108px;
+  margin: 0 auto 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.34), rgba(255,255,255,0.05) 64%);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 14px 36px rgba(5, 13, 32, 0.4), inset 0 1px 0 rgba(255,255,255,0.45);
+}
+@keyframes promoSpin { to { transform: rotate(360deg); } }
+.promo-medal-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,0.32);
+  animation: promoSpin 26s linear infinite;
+}
+.promo-medal-num {
+  font-family: var(--font-head);
+  font-size: 3.1rem;
+  font-weight: 700;
+  line-height: 0.92;
+  color: var(--white);
+  text-shadow: 0 6px 18px rgba(4, 12, 30, 0.45);
+}
+.promo-medal-label {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+}
+
+/* Copy */
+.promo-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.05rem;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.24);
+  color: rgba(255,255,255,0.9);
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+@keyframes promoPing {
+  0%   { box-shadow: 0 0 0 0 rgba(127,227,196,0.65); }
+  70%  { box-shadow: 0 0 0 9px rgba(127,227,196,0); }
+  100% { box-shadow: 0 0 0 0 rgba(127,227,196,0); }
+}
+.promo-kicker-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #7fe3c4;
+  animation: promoPing 2.2s ease-out infinite;
+}
+.promo-title {
+  color: var(--white);
+  font-size: clamp(1.55rem, 4.4vw, 2.3rem);
+  line-height: 1.16;
+  margin: 1.15rem 0 0.9rem;
+}
+.promo-title span { color: #7fe3c4; }
+.promo-copy {
+  color: rgba(255,255,255,0.82);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  max-width: 500px;
+  margin: 0 auto 1.7rem;
+}
+
+/* Mini stat row */
+.promo-stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  margin: 0 0 1.85rem;
+  padding: 1.1rem 0.5rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.13);
+}
+.promo-stats li { display: flex; flex-direction: column; gap: 0.25rem; }
+.promo-stats strong {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--white);
+}
+.promo-stats span {
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+}
+
+/* Actions + footnote */
+.promo-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+.promo-actions .btn-lg { padding: 0.85rem 1.8rem; font-size: 0.95rem; }
+.promo-ghost {
+  background: rgba(255,255,255,0.06);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.45);
+}
+.promo-ghost:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.75);
+  transform: translateY(-1px);
+}
+.promo-note {
+  margin: 1.5rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.62);
+}
+.promo-note a { color: #7fe3c4; text-decoration: none; border-bottom: 1px solid rgba(127,227,196,0.4); }
+.promo-note a:hover { color: #a5f0da; }
+
+@media (max-width: 560px) {
+  .promo { padding: 1rem; align-items: flex-end; }
+  .promo-card { padding: 2.4rem 1.25rem 1.9rem; border-radius: var(--radius-lg); max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem); }
+  .promo-medal { width: 84px; height: 84px; margin-bottom: 1.1rem; }
+  .promo-medal-num { font-size: 2.5rem; }
+  .promo-medal-label { font-size: 0.5rem; }
+  .promo-copy { font-size: 0.92rem; }
+  .promo-stats { grid-template-columns: repeat(2, 1fr); gap: 0.9rem 0.5rem; padding: 1rem 0.5rem; }
+  .promo-actions .btn { flex: 1 1 100%; justify-content: center; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -1871,4 +2098,7 @@ textarea:focus-visible {
   }
   .fade-up, .reveal, .reveal-left, .reveal-right, .zoom-in { opacity: 1 !important; transform: none !important; }
   .ops-card .ops-bar span { width: var(--w) !important; }
+  /* Never leave the celebration card stuck mid-transition */
+  .promo-card, .promo-backdrop { opacity: 1 !important; transform: none !important; }
+  .promo-confetti, .promo-medal-ring { display: none; }
 }
