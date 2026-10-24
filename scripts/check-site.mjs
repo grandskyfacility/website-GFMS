@@ -130,7 +130,11 @@ for (const file of HTML_FILES) {
   if (!/<title>[^<]+<\/title>/i.test(html)) fail('html', `${page} — missing a <title>`);
   if (!/name="viewport"/i.test(html)) fail('html', `${page} — missing the viewport meta tag`);
   if (/on(click|load|error|mouseover)="/i.test(html)) fail('html', `${page} — inline event handler (blocked by the site CSP)`);
-  if (/<script(?![^>]*\bsrc=)[^>]*>[\s\S]*?\S[\s\S]*?<\/script>/i.test(html)) {
+  /* Script blocks with a non-JS MIME type (e.g. application/ld+json for SEO
+     structured data) are inert data: browsers never execute them and the site
+     CSP never blocks them, so they are exempt from this executable-script check. */
+  const htmlNoDataScripts = html.replace(/<script[^>]*\btype=["'][^"']*\/(?:ld\+)?json[^"']*["'][^>]*>[\s\S]*?<\/script>/gi, '');
+  if (/<script(?![^>]*\bsrc=)[^>]*>[\s\S]*?\S[\s\S]*?<\/script>/i.test(htmlNoDataScripts)) {
     fail('html', `${page} — inline <script> block (blocked by the site CSP)`);
   }
 

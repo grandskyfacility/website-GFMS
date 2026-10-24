@@ -2088,6 +2088,14 @@ body.promo-open { overflow: hidden; }
   .promo-actions .btn { flex: 1 1 100%; justify-content: center; }
 }
 
+/* ---------- Horizontal clip guard ----------
+   Decorative hero orbs and the marquee track intentionally extend past
+   the viewport; clip them site-wide. `clip` (unlike `hidden`) does not
+   create a scroll container, so the sticky header keeps working. */
+body {
+  overflow-x: clip;
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -2101,4 +2109,151 @@ body.promo-open { overflow: hidden; }
   /* Never leave the celebration card stuck mid-transition */
   .promo-card, .promo-backdrop { opacity: 1 !important; transform: none !important; }
   .promo-confetti, .promo-medal-ring { display: none; }
+}
+
+/* ==================================================================
+   NEW: Supply & Trading  ·  Credentials  ·  Work & Testimonials
+   ·  Catalogue strip  ·  Legal pages
+   ================================================================== */
+
+/* ---------- Credentials strip ---------- */
+.creds-strip { padding: 2.2rem 0 2.6rem; }
+.creds-row {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem 1rem;
+}
+.cred-chip {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  background: var(--white); border: 1px solid var(--light-gray);
+  border-radius: 999px; padding: 0.55rem 1.15rem;
+  font-size: 0.82rem; font-weight: 600; color: var(--text-body);
+  box-shadow: var(--shadow-sm);
+}
+.cred-chip svg { width: 15px; height: 15px; color: var(--teal); flex-shrink: 0; }
+.cred-chip small { font-weight: 500; color: var(--text-muted); }
+
+/* ---------- Supply & Trading band ---------- */
+.supply-grid {
+  display: grid; grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem; margin-top: 3rem; align-items: start;
+}
+.supply-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem 1.5rem; }
+.supply-item {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  background: var(--white); border: 1px solid var(--light-gray);
+  border-radius: var(--radius-md); padding: 1rem 1.15rem;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.supply-item:hover {
+  transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(58,170,143,0.45);
+}
+.supply-item svg { width: 20px; height: 20px; color: var(--teal); flex-shrink: 0; margin-top: 0.15rem; }
+.supply-item h5 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; }
+.supply-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+.supply-card {
+  background: linear-gradient(140deg, var(--navy) 0%, var(--navy-dark) 100%);
+  border-radius: var(--radius-lg); padding: 2.2rem; color: var(--white);
+  position: relative; overflow: hidden;
+}
+.supply-card::after {
+  content: ""; position: absolute; width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(58,170,143,0.18); filter: blur(10px); top: -70px; right: -70px;
+}
+.supply-card .icon-box { background: rgba(93,196,168,0.15); color: var(--teal-light); }
+.supply-card h3 { font-size: 1.25rem; margin: 1rem 0 0.5rem; color: var(--white); }
+.supply-card p { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 1.25rem; }
+.supply-card ul { margin-bottom: 1.6rem; }
+.supply-card li {
+  display: flex; align-items: center; gap: 0.55rem;
+  font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-bottom: 0.55rem;
+}
+.supply-card li svg { width: 14px; height: 14px; color: var(--teal-light); flex-shrink: 0; }
+
+/* ---------- Work / case studies ---------- */
+.case-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem;
+}
+.case-card {
+  background: var(--white); border: 1px solid var(--light-gray); border-radius: var(--radius-lg);
+  padding: 1.8rem; display: flex; flex-direction: column; gap: 0.9rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.case-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.case-tag {
+  align-self: flex-start; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--teal);
+  background: rgba(58,170,143,0.1); border-radius: 999px; padding: 0.35rem 0.85rem;
+}
+.case-card h4 { font-size: 1.12rem; color: var(--navy); line-height: 1.35; }
+.case-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+.case-stats {
+  margin-top: auto; padding-top: 1rem; border-top: 1px dashed var(--light-gray);
+  display: grid; grid-template-columns: repeat(3, 1fr); text-align: center;
+}
+.case-stats div strong {
+  display: block; font-family: var(--font-head); font-weight: 700;
+  font-size: 1.35rem; color: var(--teal);
+}
+.case-stats div span { font-size: 0.68rem; color: var(--text-muted); line-height: 1.3; display: block; margin-top: 0.2rem; }
+
+/* ---------- Testimonials ---------- */
+.testimonial-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem;
+}
+.testimonial-card {
+  background: var(--white); border: 1px solid var(--light-gray); border-radius: var(--radius-lg);
+  padding: 1.8rem; position: relative;
+}
+.testimonial-card .t-quote {
+  position: absolute; top: -16px; left: 1.8rem; width: 36px; height: 36px;
+  background: var(--teal); color: var(--white); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; line-height: 1;
+}
+.testimonial-card p { font-size: 0.9rem; color: var(--text-body); line-height: 1.65; margin: 0.4rem 0 1.2rem; }
+.t-who { display: flex; align-items: center; gap: 0.75rem; }
+.t-avatar {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  color: var(--white); font-weight: 700; font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.t-who strong { display: block; font-size: 0.88rem; color: var(--navy); }
+.t-who span { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ---------- Catalogue strip ---------- */
+.catalogue-strip {
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  background: var(--white); border: 1px solid var(--light-gray);
+  border-radius: var(--radius-lg); padding: 1.6rem 2rem; margin-top: 2.5rem;
+  flex-wrap: wrap; box-shadow: var(--shadow-sm);
+}
+.catalogue-strip h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 0.3rem; }
+.catalogue-strip p { font-size: 0.88rem; color: var(--text-muted); }
+.catalogue-strip .left { display: flex; align-items: center; gap: 1.2rem; }
+.catalogue-strip .icon-box { margin: 0; flex-shrink: 0; }
+
+/* ---------- Legal pages ---------- */
+.legal-content { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+.legal-content h2 {
+  font-family: var(--font-head); font-size: 1.4rem; color: var(--navy);
+  margin: 2.2rem 0 0.8rem; font-weight: 700;
+}
+.legal-content h2:first-child { margin-top: 0; }
+.legal-content p, .legal-content li {
+  font-size: 0.95rem; color: var(--text-body); line-height: 1.75;
+}
+.legal-content ul { padding-left: 1.4rem; margin: 0.6rem 0; }
+.legal-content .legal-updated { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .supply-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .case-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .supply-items { grid-template-columns: 1fr; }
+  .case-grid, .testimonial-grid { grid-template-columns: 1fr; }
+  .case-stats div strong { font-size: 1.15rem; }
+  .catalogue-strip { flex-direction: column; align-items: flex-start; }
 }

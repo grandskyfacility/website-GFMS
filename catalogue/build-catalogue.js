@@ -51,7 +51,7 @@ const WEBSITE = 'grandskyfacility.com';
 
 const STATS = [
   { n: '200+', l: 'Facilities managed' },
-  { n: '8', l: 'Service verticals' },
+  { n: '9', l: 'Service verticals' },
   { n: '500+', l: 'Professionals on roster' },
   { n: '24/7', l: 'Emergency support' },
   { n: '98%', l: 'Client retention' },
@@ -98,6 +98,11 @@ const SERVICES = [
     t: 'Solar Power Solutions', c: C.green,
     d: 'Clean energy installation and maintenance delivering 40–60% lower energy costs, from rooftop to ground-mounted, on-grid, off-grid and hybrid configurations.',
     f: ['Rooftop and ground-mounted solar', 'On-grid, off-grid and hybrid systems', 'Net metering and subsidy assistance', 'Solar panel cleaning and AMC', 'Energy generation monitoring'],
+  },
+  {
+    t: 'Supply & Trading', c: C.navy,
+    d: 'As a B2B supplier and procurement partner, we source and trade the same equipment we professionally deploy — batteries, UPS systems, CCTV hardware, electrical and MEP components, AC units and solar packages.',
+    f: ['Batteries, UPS systems and spares supply', 'CCTV, DVR/NVR and access-control hardware', 'Electrical, plumbing and MEP components', 'AC units and solar equipment packages', 'GST invoicing, documentation and pan-India delivery', 'Optional installation and AMC by our own teams'],
   },
 ];
 
@@ -147,7 +152,7 @@ const doc = new PDFDocument({
     Title: 'GrandSky — Company Catalogue',
     Author: COMPANY,
     Subject: 'Integrated Facility Management Services',
-    Keywords: 'facility management, security, manpower, MEP, solar, UPS, New Delhi',
+    Keywords: 'facility management, security, manpower, MEP, solar, UPS, equipment supply, trading, New Delhi',
     Creator: 'GrandSky Facility & Management Services LLP',
   },
 });
@@ -258,7 +263,7 @@ function cover() {
   t('INTEGRATED FACILITY MANAGEMENT', { font: 'BodyBold', size: 8.5, color: C.teal, x: M, y: 205, w: CW, lh: 0, cs: 2.4 });
   let y = t('Facilities that run flawlessly, every single day.',
     { font: 'HeadBold', size: 40, color: C.white, x: M, y: 222, w: CW - 20, lh: -2 });
-  y = t('Security, manpower, surveillance, MEP, power and solar — delivered by a single, accountable partner that has kept 200+ facilities across India safe, efficient and fully operational since 2021.',
+  y = t('Security, manpower, surveillance, MEP, power and solar plus equipment supply — delivered by a single, accountable partner that has kept 200+ facilities across India safe, efficient and fully operational since 2021.',
     { font: 'Body', size: 11, color: C.whiteDim, x: M, y: y + 14, w: 372, lh: 5 });
 
   // stat strip — 3 columns x 2 rows
@@ -307,7 +312,7 @@ function about() {
   [
     ['Founded', '2021, New Delhi'],
     ['Facilities managed', '200+ across India'],
-    ['Service verticals', '8 integrated services'],
+    ['Service verticals', '9 integrated services'],
     ['Team', '500+ trained professionals'],
     ['Coverage', 'Delhi NCR & pan-India'],
   ].forEach((r) => {
@@ -400,7 +405,7 @@ function serviceDetail(slice, pageNo, accent) {
 
 /* ------------------------------------------------------------------ page 8 */
 function sectorsAndWhy() {
-  contentPage('Sectors & Strengths', 8, C.green);
+  contentPage('Sectors & Strengths', 9, C.green);
   let y = pageTitle('Who We Serve', 'Trusted Across the Facilities That Keep India Running',
     null, C.green);
 
@@ -439,7 +444,7 @@ function sectorsAndWhy() {
 
 /* ------------------------------------------------------------------ page 9 */
 function commitmentsAndProcess() {
-  contentPage('Commitments & Process', 9, C.navy);
+  contentPage('Commitments & Process', 10, C.navy);
   let y = pageTitle('How We Work', 'What You Can Hold Us To',
     'Facility management is a trust business. These are the standards written into your agreement — not just our brochure.', C.navy);
 
@@ -529,6 +534,7 @@ serviceDetail(SERVICES.slice(0, 2), 4, C.navy);
 serviceDetail(SERVICES.slice(2, 4), 5, C.teal);
 serviceDetail(SERVICES.slice(4, 6), 6, C.green);
 serviceDetail(SERVICES.slice(6, 8), 7, C.sky);
+serviceDetail(SERVICES.slice(8, 9), 8, C.navy);
 sectorsAndWhy();
 commitmentsAndProcess();
 backCover();
